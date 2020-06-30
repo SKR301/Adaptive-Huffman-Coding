@@ -29,7 +29,7 @@ A program to encode an input string using Adaptive Huffman Coding Algorithm
   - *Adaptive Huffman Encode*<br />
   ![Adaptive Huffman Encode](https://github.com/SKR301/Adaptive-Huffman-Coding/blob/master/ScreenShots/encode.png)
   - *Adaptive Huffman Decode*<br />
-  ![Adaptive Huffman Decode](https://github.com/SKR301/Adaptive-Huffman-Coding/blob/master/ScreenShots/deccode.png)
+  ![Adaptive Huffman Decode](https://github.com/SKR301/Adaptive-Huffman-Coding/blob/master/ScreenShots/decode.png)
   
   ## Contributors
   @SKR301- [Saurav Kumar](https://github.com/SKR301): Original Creator
