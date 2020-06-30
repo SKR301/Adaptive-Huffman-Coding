@@ -1,5 +1,5 @@
 # Adaptive-Huffman-Coding
-A program to encode an input string using Adaptive Huffman Coding Algorithm
+A program to encode/decode an input string using Adaptive Huffman Coding Algorithm (vectors used).
   
   ## Table of Content
   - [Technologies](#technologies)
