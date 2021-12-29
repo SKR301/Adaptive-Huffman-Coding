@@ -32,4 +32,4 @@ A program to encode/decode an input string using Adaptive Huffman Coding Algorit
   ![Adaptive Huffman Decode](https://github.com/SKR301/Adaptive-Huffman-Coding/blob/master/ScreenShots/decode.png)
   
   ## Contributors
-  @SKR301- [Saurav Kumar](https://github.com/SKR301): Original Creator
+  @SKR301- [Saurav Kumar](https://github.com/SKR301)
