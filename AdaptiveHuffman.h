@@ -5,7 +5,6 @@ private:
 	std::vector<node> Tree;
 	std::string data;
 	std::string output;
-	std::vector<node>tree;
 	int NYT=0;
 	int nodeNo=51;
 	int currNode;
@@ -16,7 +15,7 @@ public:
 	std::string encode(std::string);
 	std::string decode(std::string);
 
-	bool isCharFirst(int ind);
+	bool isCharFirst(int, std::string);
 	std::string givenCode(char);
 	std::string retCodeData(std::string);
 	void update(bool flag, std::string);
@@ -36,15 +35,14 @@ std::string AdaptiveHuffman::encode(std::string inputText){
 	bool firstFlag;
 	for(int a=0;a<inputText.length();a++){
 		firstFlag=false;
-		if(isCharFirst(a)){										
+		if(isCharFirst(a, inputText)){	
 			firstFlag=true;
-			output+=tree[NYT].code;
-			output+=givenCode(data[a]);
+			output+=Tree[NYT].code;	
+			output+=givenCode(inputText[a]);			
 		} else {
-			output+=retCodeData(std::string(1,data[a]));
+			output+=retCodeData(std::string(1,inputText[a]));
 		}
-
-		update(firstFlag,std::string(1,data[a]));
+		update(firstFlag,std::string(1,inputText[a]));
 	}
 	return "";
 }
@@ -68,9 +66,9 @@ node AdaptiveHuffman::createNode(std::string str, int n, int freq,int p, std::st
 }
 
 //return true if symbol is first appearance
-bool AdaptiveHuffman::isCharFirst(int n){
-	for(int a=0;a<n;a++){
-		if(data[a]==data[n]){
+bool AdaptiveHuffman::isCharFirst(int ind, std::string str){
+	for(int a=0;a<ind;a++){
+		if(str[a]==str[ind]){
 			return false;
 		}
 	}
@@ -78,8 +76,8 @@ bool AdaptiveHuffman::isCharFirst(int n){
 }
 
 //return code for specific data element
-std::string AdaptiveHuffman::givenCode(char str){
-	switch(str){
+std::string AdaptiveHuffman::givenCode(char ch){
+	switch(ch){
 		case 'a': return "00000";break;
 		case 'b': return "00001";break;
 		case 'c': return "00010";break;
@@ -112,35 +110,35 @@ std::string AdaptiveHuffman::givenCode(char str){
 
 //return code for the data element
 std::string AdaptiveHuffman::retCodeData(std::string str){
-	for(int a=0;a<tree.size();a++){
-		if(str==tree[a].character){
+	for(int a=0;a<Tree.size();a++){
+		if(str==Tree[a].character){
 			currNode=a;
-			return tree[a].code;
+			return Tree[a].code;
 		}		
 	}
 	return "";
 }
 
-//update the tree
+//update the Tree
 void AdaptiveHuffman::update(bool flag, std::string str){
 	if(flag){
-		tree[NYT].character="-";
-		tree[NYT].leftChild=tree.size();
-		tree[NYT].rightChild=tree.size()+1;
+		Tree[NYT].character="-";
+		Tree[NYT].leftChild=Tree.size();
+		Tree[NYT].rightChild=Tree.size()+1;
 
-		createNode("NYT",tree[NYT].number-2,0,NYT,tree[NYT].code+"0");
-		createNode(str,tree[NYT].number-1,1,NYT,tree[NYT].code+"1");
+		Tree.push_back(createNode("NYT",Tree[NYT].number-2,0,NYT,Tree[NYT].code+"0"));
+		Tree.push_back(createNode(str,Tree[NYT].number-1,1,NYT,Tree[NYT].code+"1"));
 
-		tree[NYT].weight++;
-		NYT=tree[NYT].leftChild;
+		Tree[NYT].weight++;
+		NYT=Tree[NYT].leftChild;
 
-		currNode=tree[NYT].parent;
+		currNode=Tree[NYT].parent;
 	} else {
 		int nodeMax=findNodeMax(currNode);
 		if(nodeMax>0){
 			switchNodes(currNode,nodeMax);
 		}
-		tree[currNode].weight++;
+		Tree[currNode].weight++;
 	}
 	
 	gotoParent(currNode);
@@ -149,16 +147,16 @@ void AdaptiveHuffman::update(bool flag, std::string str){
 //goto parent of node
 void AdaptiveHuffman::gotoParent(int n){
 	int nodeMax;
-	while(tree[n].parent!=-1){
-		n=tree[n].parent;
+	while(Tree[n].parent!=-1){
+		n=Tree[n].parent;
 		nodeMax=findNodeMax(n);
 
 		if(nodeMax<0){
-			tree[n].weight++;
+			Tree[n].weight++;
 		} else {
 			switchNodes(n,nodeMax);
 			reNumCode(0);
-			tree[n].weight++;
+			Tree[n].weight++;
 			nodeNo=51;
 		}
 	}
@@ -166,11 +164,11 @@ void AdaptiveHuffman::gotoParent(int n){
 
 //return the node index with max node number. in block else -1
 int AdaptiveHuffman::findNodeMax(int n){
-	int w=tree[n].weight;
+	int w=Tree[n].weight;
 	int index=n;
 
-	for(int a=0;a<tree.size();a++){
-		if(tree[a].weight==w&&tree[a].number>tree[index].number){
+	for(int a=0;a<Tree.size();a++){
+		if(Tree[a].weight==w&&Tree[a].number>Tree[index].number){
 			index=a;
 		}
 	}
@@ -186,61 +184,61 @@ int AdaptiveHuffman::findNodeMax(int n){
 void AdaptiveHuffman::switchNodes(int a,int b){
 
 	//swap parent's child
-	int parent_a=tree[a].parent;
-	int parent_b=tree[b].parent;
-	int parent_a_left=tree[parent_a].leftChild;
-	int parent_a_right=tree[parent_a].rightChild;
-	int parent_b_left=tree[parent_b].leftChild;
-	int parent_b_right=tree[parent_b].rightChild;
+	int parent_a=Tree[a].parent;
+	int parent_b=Tree[b].parent;
+	int parent_a_left=Tree[parent_a].leftChild;
+	int parent_a_right=Tree[parent_a].rightChild;
+	int parent_b_left=Tree[parent_b].leftChild;
+	int parent_b_right=Tree[parent_b].rightChild;
 
 
 	//swap number.
-	int temp=tree[a].number;
-	tree[a].number=tree[b].number;
-	tree[b].number=temp;
+	int temp=Tree[a].number;
+	Tree[a].number=Tree[b].number;
+	Tree[b].number=temp;
 
 	//swap code
-	std::string str=tree[a].code;
-	tree[a].code=tree[b].code;
-	tree[b].code=str;
+	std::string str=Tree[a].code;
+	Tree[a].code=Tree[b].code;
+	Tree[b].code=str;
 
 	//swap parent
-	temp=tree[a].parent;
-	tree[a].parent=tree[b].parent;
-	tree[b].parent=temp;
+	temp=Tree[a].parent;
+	Tree[a].parent=Tree[b].parent;
+	Tree[b].parent=temp;
 
 	// swap parents chid
 	if(parent_a_left==a){
-		tree[parent_a].leftChild=b;
+		Tree[parent_a].leftChild=b;
 	} else {
-		tree[parent_a].rightChild=b;
+		Tree[parent_a].rightChild=b;
 	}
 
 	if(parent_b_left==b){
-		tree[parent_b].leftChild=a;
+		Tree[parent_b].leftChild=a;
 	} else {
-		tree[parent_b].rightChild=a;
+		Tree[parent_b].rightChild=a;
 	}
 }
 
 //rearrange node number. and codes
 void AdaptiveHuffman::reNumCode(int n){
-	if(tree[n].leftChild!=-1&&tree[n].rightChild!=-1){
-		tree[tree[n].rightChild].number=(--nodeNo);
-		tree[tree[n].leftChild].number=(--nodeNo);
+	if(Tree[n].leftChild!=-1&&Tree[n].rightChild!=-1){
+		Tree[Tree[n].rightChild].number=(--nodeNo);
+		Tree[Tree[n].leftChild].number=(--nodeNo);
 
-		tree[tree[n].leftChild].code=tree[n].code+"0";
-		tree[tree[n].rightChild].code=tree[n].code+"1";
+		Tree[Tree[n].leftChild].code=Tree[n].code+"0";
+		Tree[Tree[n].rightChild].code=Tree[n].code+"1";
 			
-		reNumCode(tree[n].rightChild);
-		reNumCode(tree[n].leftChild);
+		reNumCode(Tree[n].rightChild);
+		reNumCode(Tree[n].leftChild);
 	}	
 }
 
 //display
 void AdaptiveHuffman::display(){
-	for(int a=0;a<tree.size();a++){
-		std::cout<<"\n"<<a<<" character:"<<tree[a].character<<" weight:"<<tree[a].weight<<" number:"<<tree[a].number<<" l:"<<tree[a].leftChild<<" r:"<<tree[a].rightChild<<" p:"<<tree[a].parent<<" code:"<<tree[a].code;
+	for(int a=0;a<Tree.size();a++){
+		std::cout<<"\n"<<a<<" character:"<<Tree[a].character<<" weight:"<<Tree[a].weight<<" number:"<<Tree[a].number<<" l:"<<Tree[a].leftChild<<" r:"<<Tree[a].rightChild<<" p:"<<Tree[a].parent<<" code:"<<Tree[a].code;
 	}
 	std::cout<<"\n";
 	system("pause");

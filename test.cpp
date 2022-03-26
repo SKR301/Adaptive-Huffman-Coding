@@ -14,7 +14,6 @@ int main(int argc, char const *argv[])
 	int passCount = 0;
 	int total = 5;
 
-
 	AdaptiveHuffman AH;
 
 	std::cout<<"\n";
