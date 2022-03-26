@@ -3,18 +3,18 @@
 class AdaptiveHuffman{
 private:
 	std::vector<node> Tree;
-	std::string data;
 	std::string output;
-	int NYT=0;
-	int nodeNo=51;
+	int NYT;
+	int nodeNo;
 	int currNode;
 
 public:
-	AdaptiveHuffman();
+	// AdaptiveHuffman();
 	node createNode(std::string, int, int, int, std::string);
 	std::string encode(std::string);
 	std::string decode(std::string);
 
+	void init();
 	bool isCharFirst(int, std::string);
 	std::string givenCode(char);
 	std::string retCodeData(std::string);
@@ -26,12 +26,23 @@ public:
 	void display();
 };
 
-AdaptiveHuffman::AdaptiveHuffman(){
-	Tree.push_back(createNode("NYT", 51, 0, -1, ""));
+// AdaptiveHuffman::AdaptiveHuffman(){
+// 	init();
+// }
+
+void AdaptiveHuffman::init(){
+	nodeNo = 51;
+	currNode = 0;
+	NYT = 0;
+	Tree.clear();
+	Tree.push_back(createNode("NYT", nodeNo, 0, -1, ""));
+	output = "";
 }
 
 // encode the input text
 std::string AdaptiveHuffman::encode(std::string inputText){
+	init();
+
 	bool firstFlag;
 	for(int a=0;a<inputText.length();a++){
 		firstFlag=false;
@@ -44,7 +55,7 @@ std::string AdaptiveHuffman::encode(std::string inputText){
 		}
 		update(firstFlag,std::string(1,inputText[a]));
 	}
-	return "";
+	return output;
 }
 
 std::string AdaptiveHuffman::decode(std::string){
