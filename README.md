@@ -19,10 +19,32 @@ A program to encode/decode an input string using Adaptive Huffman Coding Algorit
   4. Now run `./"my file name"`.
   
   ## Working
-  How the program works:-
+  ### The cpp files:-
   - It will ask you to enter the input text.
   - After the input press `Enter`.
   - You will get it's encode/decoded form.
+ 
+  ### The header files:-
+  - Paste the `AdaptiveHuffman.h` and `Node.h` file in your desired directory.
+  - Import and use the header with following code :-
+
+  include the header
+  ```
+          #include "AdaptiveHuffman.h"
+  ```
+  use the header
+  ```
+          AdaptiveHuffman AH;
+          
+          // input parameter is a plain text which you want to encode
+          // returns the encoded std::string for input parameter
+          AH.encode("aardvark");                               
+          
+          // input parameter is a encode text which you want to decode
+          // returns the decoded std::string for input parameter
+          AH.decode("00000101000100000110001011010110001010"); 
+          
+  ```
   
   ## Screenshots
   Some screenshots of the program:-
