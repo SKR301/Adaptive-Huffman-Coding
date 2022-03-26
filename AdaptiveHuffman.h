@@ -7,21 +7,32 @@ private:
 public:
 	AdaptiveHuffman();
 	node createNode(std::string, int, int, int, std::string);
-	std::string encode();
-	std::string decode();
+	std::string encode(std::string);
+	std::string decode(std::string);
 };
 
 AdaptiveHuffman::AdaptiveHuffman(){
 	Tree.push_back(createNode("NYT", 51, 0, -1, ""));
-	std::cout<<Tree[0].code<<Tree[0].parent<<Tree[0].rightChild<<Tree[0].leftChild<<Tree[0].weight<<Tree[0].number<<Tree[0].character;
 }
 
-std::string AdaptiveHuffman::encode(){
+std::string AdaptiveHuffman::encode(std::string inputText){
+	// bool firstFlag;
+	// for(int a=0;a<data.length();a++){
+	// 	firstFlag=false;
+	// 	if(first(a)){										
+	// 		firstFlag=true;
+	// 		output+=tree[NYT].code;
+	// 		output+=givenCode(data[a]);
+	// 	} else {
+	// 		output+=retCodeData(string(1,data[a]));
+	// 	}
 
+	// 	update(firstFlag,string(1,data[a]));
+	// }
 	return "";
 }
 
-std::string AdaptiveHuffman::decode(){
+std::string AdaptiveHuffman::decode(std::string){
 
 	return "";
 }
