@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
 		std::cout<<"\n\nFAILED!\n";
 	}
 	std::cout<<"\nActual output:\t"<< encodedTestString1;
-	std::cout<<"\nExpected output\t"<< testEncodedString1;
+	std::cout<<"\nExpected output:\t"<< testEncodedString1;
 
 	std::cout<<"\n";
 	std::cout<<"\n\n----------Encode Test2:------------";
@@ -40,7 +40,7 @@ int main(int argc, char const *argv[])
 		std::cout<<"\n\nFAILED!\n";
 	}
 	std::cout<<"\nActual output:\t"<< encodedTestString2;
-	std::cout<<"\nExpected output\t"<< testEncodedString2;
+	std::cout<<"\nExpected output:\t"<< testEncodedString2;
 
 
 	std::cout<<"\n";
@@ -54,20 +54,20 @@ int main(int argc, char const *argv[])
 		std::cout<<"\n\nFAILED!\n";
 	}
 	std::cout<<"\nActual output:\t"<< decodedTestString1;
-	std::cout<<"\nExpected output\t"<< testDecodedString1;
+	std::cout<<"\nExpected output:\t"<< testDecodedString1;
 
 	std::cout<<"\n";
 	std::cout<<"\n\n----------Decode Test2:------------";
 	std::cout<<"\nInput String:\t"<<testEncodedString2;
 	std::string decodedTestString2 = AH.decode(testEncodedString2);
-	if(decodedTestString1 == testDecodedString2){
+	if(decodedTestString2 == testDecodedString2){
 		std::cout<<"\n\nPASSED!\n";
 		passCount++;
 	} else {
 		std::cout<<"\n\nFAILED!\n";
 	}
 	std::cout<<"\nActual output:\t"<< decodedTestString2;
-	std::cout<<"\nExpected output\t"<< testDecodedString2;
+	std::cout<<"\nExpected output:\t"<< testDecodedString2;
 
 
 	std::cout<<"\n";
@@ -81,7 +81,7 @@ int main(int argc, char const *argv[])
 		std::cout<<"\n\nFAILED!\n";
 	}
 	std::cout<<"\nActual output:\t"<< retrievedString;
-	std::cout<<"\nExpected output\t"<< testDecodedString3;
+	std::cout<<"\nExpected output:\t"<< testDecodedString3;
 
 
 	std::cout<<"\n\n\n\tResult: "<<passCount<<" / "<<total;

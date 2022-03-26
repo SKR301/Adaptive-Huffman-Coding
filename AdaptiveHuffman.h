@@ -16,19 +16,18 @@ public:
 
 	void init();
 	bool isCharFirst(int, std::string);
-	std::string givenCode(char);
+	bool isCodeFirst(std::string);
+	std::string retCharToCode(char);
+	std::string retIntToChar(int,int);
 	std::string retCodeData(std::string);
 	void update(bool flag, std::string);
 	void gotoParent(int);
 	int findNodeMax(int);
 	void switchNodes(int,int);
 	void reNumCode(int);
+	int b_to_d(std::string);
 	void display();
 };
-
-// AdaptiveHuffman::AdaptiveHuffman(){
-// 	init();
-// }
 
 void AdaptiveHuffman::init(){
 	nodeNo = 51;
@@ -49,7 +48,7 @@ std::string AdaptiveHuffman::encode(std::string inputText){
 		if(isCharFirst(a, inputText)){	
 			firstFlag=true;
 			output+=Tree[NYT].code;	
-			output+=givenCode(inputText[a]);			
+			output+=retCharToCode(inputText[a]);			
 		} else {
 			output+=retCodeData(std::string(1,inputText[a]));
 		}
@@ -58,9 +57,44 @@ std::string AdaptiveHuffman::encode(std::string inputText){
 	return output;
 }
 
-std::string AdaptiveHuffman::decode(std::string){
+std::string AdaptiveHuffman::decode(std::string inputText){
+	init();
 
-	return "";
+	int a=0,p;
+	std::string code;
+	bool firstFlag;
+
+	do{
+		if(Tree[currNode].leftChild==-1 && Tree[currNode].rightChild==-1){
+			if(currNode==NYT){
+				code=inputText.substr(a,4);
+				a=a+4;
+				p=b_to_d(code);
+				if(p<10){
+					code+=inputText[a++];
+					p=b_to_d(code);
+					output+=retIntToChar(p,5);
+				} else {
+					output+=retIntToChar(p,4);
+				}
+			} else {
+				output+=Tree[currNode].character;
+			}
+			
+			firstFlag=isCodeFirst(output.substr(output.length()-1,1));
+			update(firstFlag,output.substr(output.length()-1,1));
+			
+			currNode=0;
+		} else {
+			if(inputText[a++]=='0'){
+				currNode=Tree[currNode].leftChild;
+			} else {
+				currNode=Tree[currNode].rightChild;
+			}
+		}
+
+	}while(a <= inputText.length());
+	return output;
 }
 
 node AdaptiveHuffman::createNode(std::string str, int n, int freq,int p, std::string c){
@@ -86,9 +120,18 @@ bool AdaptiveHuffman::isCharFirst(int ind, std::string str){
 	return true;
 }
 
+bool AdaptiveHuffman::isCodeFirst(std::string str){
+	for(int a=0;a<Tree.size();a++){
+		if(Tree[a].character==str){
+			return false;
+		}
+	}
+	return true;
+}
+
 //return code for specific data element
-std::string AdaptiveHuffman::givenCode(char ch){
-	switch(ch){
+std::string AdaptiveHuffman::retCharToCode(char character){
+	switch(character){
 		case 'a': return "00000";break;
 		case 'b': return "00001";break;
 		case 'c': return "00010";break;
@@ -118,6 +161,69 @@ std::string AdaptiveHuffman::givenCode(char ch){
 		default: return "";
 	}
 }
+
+//return code for specific data element
+std::string AdaptiveHuffman::retIntToChar(int x,int bit){
+	if(bit==5){
+		if(x==0){
+			return "a";
+		} else if(x==1){
+			return "b";
+		} else if(x==2){
+			return "c";
+		} else if(x==3){
+			return "d";
+		} else if(x==4){
+			return "e";
+		} else if(x==5){
+			return "f";
+		} else if(x==6){
+			return "g";
+		} else if(x==7){
+			return "h";
+		} else if(x==8){
+			return "i";
+		} else if(x==9){
+			return "j";
+		} else if(x==10){
+			return "k";
+		} else if(x==11){
+			return "l";
+		} else if(x==12){
+			return "m";
+		} else if(x==13){
+			return "n";
+		} else if(x==14){
+			return "o";
+		} else if(x==15){
+			return "p";
+		} else if(x==16){
+			return "q";
+		} else if(x==17){
+			return "r";
+		} else if(x==18){
+			return "s";
+		} else if(x==19){
+			return "t";
+		}
+	} else if(bit==4){
+		if(x==10){
+			return "u";
+		} else if(x==11){
+			return "v";
+		} else if(x==12){
+			return "w";
+		} else if(x==13){
+			return "x";
+		} else if(x==14){
+			return "y";
+		} else if(x==15){
+			return "z";
+		}
+	}
+	return "";
+}
+
 
 //return code for the data element
 std::string AdaptiveHuffman::retCodeData(std::string str){
@@ -244,6 +350,17 @@ void AdaptiveHuffman::reNumCode(int n){
 		reNumCode(Tree[n].rightChild);
 		reNumCode(Tree[n].leftChild);
 	}	
+}
+
+//convert binary to decimal
+int AdaptiveHuffman::b_to_d(std::string bit){
+	int dec=0;
+	for(int a=bit.length()-1;a>=0;a--){
+		if(bit[a]=='1'){
+			dec+=pow(2,bit.length()-a-1);
+		}
+	}
+	return dec;
 }
 
 //display
