@@ -41,10 +41,10 @@ std::string AdaptiveHuffman::encode(std::string inputText){
 			output+=tree[NYT].code;
 			output+=givenCode(data[a]);
 		} else {
-			output+=retCodeData(string(1,data[a]));
+			output+=retCodeData(std::string(1,data[a]));
 		}
 
-		update(firstFlag,string(1,data[a]));
+		update(firstFlag,std::string(1,data[a]));
 	}
 	return "";
 }
@@ -113,7 +113,7 @@ std::string AdaptiveHuffman::givenCode(char str){
 //return code for the data element
 std::string AdaptiveHuffman::retCodeData(std::string str){
 	for(int a=0;a<tree.size();a++){
-		if(str==tree[a].ch){
+		if(str==tree[a].character){
 			currNode=a;
 			return tree[a].code;
 		}		
@@ -124,15 +124,15 @@ std::string AdaptiveHuffman::retCodeData(std::string str){
 //update the tree
 void AdaptiveHuffman::update(bool flag, std::string str){
 	if(flag){
-		tree[NYT].ch="-";
-		tree[NYT].left=tree.size();
-		tree[NYT].right=tree.size()+1;
+		tree[NYT].character="-";
+		tree[NYT].leftChild=tree.size();
+		tree[NYT].rightChild=tree.size()+1;
 
-		createNode("NYT",tree[NYT].no-2,0,NYT,tree[NYT].code+"0");
-		createNode(str,tree[NYT].no-1,1,NYT,tree[NYT].code+"1");
+		createNode("NYT",tree[NYT].number-2,0,NYT,tree[NYT].code+"0");
+		createNode(str,tree[NYT].number-1,1,NYT,tree[NYT].code+"1");
 
 		tree[NYT].weight++;
-		NYT=tree[NYT].left;
+		NYT=tree[NYT].leftChild;
 
 		currNode=tree[NYT].parent;
 	} else {
@@ -164,13 +164,13 @@ void AdaptiveHuffman::gotoParent(int n){
 	}
 }
 
-//return the node index with max node no. in block else -1
+//return the node index with max node number. in block else -1
 int AdaptiveHuffman::findNodeMax(int n){
 	int w=tree[n].weight;
 	int index=n;
 
 	for(int a=0;a<tree.size();a++){
-		if(tree[a].weight==w&&tree[a].no>tree[index].no){
+		if(tree[a].weight==w&&tree[a].number>tree[index].number){
 			index=a;
 		}
 	}
@@ -188,19 +188,19 @@ void AdaptiveHuffman::switchNodes(int a,int b){
 	//swap parent's child
 	int parent_a=tree[a].parent;
 	int parent_b=tree[b].parent;
-	int parent_a_left=tree[parent_a].left;
-	int parent_a_right=tree[parent_a].right;
-	int parent_b_left=tree[parent_b].left;
-	int parent_b_right=tree[parent_b].right;
+	int parent_a_left=tree[parent_a].leftChild;
+	int parent_a_right=tree[parent_a].rightChild;
+	int parent_b_left=tree[parent_b].leftChild;
+	int parent_b_right=tree[parent_b].rightChild;
 
 
-	//swap no.
-	int temp=tree[a].no;
-	tree[a].no=tree[b].no;
-	tree[b].no=temp;
+	//swap number.
+	int temp=tree[a].number;
+	tree[a].number=tree[b].number;
+	tree[b].number=temp;
 
 	//swap code
-	string str=tree[a].code;
+	std::string str=tree[a].code;
 	tree[a].code=tree[b].code;
 	tree[b].code=str;
 
@@ -211,37 +211,37 @@ void AdaptiveHuffman::switchNodes(int a,int b){
 
 	// swap parents chid
 	if(parent_a_left==a){
-		tree[parent_a].left=b;
+		tree[parent_a].leftChild=b;
 	} else {
-		tree[parent_a].right=b;
+		tree[parent_a].rightChild=b;
 	}
 
 	if(parent_b_left==b){
-		tree[parent_b].left=a;
+		tree[parent_b].leftChild=a;
 	} else {
-		tree[parent_b].right=a;
+		tree[parent_b].rightChild=a;
 	}
 }
 
-//rearrange node no. and codes
+//rearrange node number. and codes
 void AdaptiveHuffman::reNumCode(int n){
-	if(tree[n].left!=-1&&tree[n].right!=-1){
-		tree[tree[n].right].no=(--nodeNo);
-		tree[tree[n].left].no=(--nodeNo);
+	if(tree[n].leftChild!=-1&&tree[n].rightChild!=-1){
+		tree[tree[n].rightChild].number=(--nodeNo);
+		tree[tree[n].leftChild].number=(--nodeNo);
 
-		tree[tree[n].left].code=tree[n].code+"0";
-		tree[tree[n].right].code=tree[n].code+"1";
+		tree[tree[n].leftChild].code=tree[n].code+"0";
+		tree[tree[n].rightChild].code=tree[n].code+"1";
 			
-		reNumCode(tree[n].right);
-		reNumCode(tree[n].left);
+		reNumCode(tree[n].rightChild);
+		reNumCode(tree[n].leftChild);
 	}	
 }
 
 //display
 void AdaptiveHuffman::display(){
 	for(int a=0;a<tree.size();a++){
-		cout<<"\n"<<a<<" ch:"<<tree[a].ch<<" weight:"<<tree[a].weight<<" no:"<<tree[a].no<<" l:"<<tree[a].left<<" r:"<<tree[a].right<<" p:"<<tree[a].parent<<" code:"<<tree[a].code;
+		std::cout<<"\n"<<a<<" character:"<<tree[a].character<<" weight:"<<tree[a].weight<<" number:"<<tree[a].number<<" l:"<<tree[a].leftChild<<" r:"<<tree[a].rightChild<<" p:"<<tree[a].parent<<" code:"<<tree[a].code;
 	}
-	cout<<"\n";
+	std::cout<<"\n";
 	system("pause");
 }
