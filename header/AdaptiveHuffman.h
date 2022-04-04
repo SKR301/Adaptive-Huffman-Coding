@@ -13,6 +13,8 @@ public:
 	node createNode(std::string, int, int, int, std::string);
 	std::string encode(std::string);
 	std::string decode(std::string);
+	std::string compress(std::string);
+	std::string decompress(std::string);
 
 	void init();
 	bool isCharFirst(int, std::string);

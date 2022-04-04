@@ -12,7 +12,7 @@ int main(int argc, char const *argv[])
 	std::string testEncodedString2 = "1101";
 
 	int passCount = 0;
-	int total = 5;
+	int total = 6;
 
 	AdaptiveHuffman AH;
 
@@ -82,6 +82,22 @@ int main(int argc, char const *argv[])
 	}
 	std::cout<<"\nActual output:\t"<< retrievedString;
 	std::cout<<"\nExpected output:\t"<< testDecodedString3;
+
+
+	std::string testDecompressedString1 = "aardvark";
+
+	std::cout<<"\n";
+	std::cout<<"\n\n----------Compress-Decompress Test1:------------";
+	std::cout<<"\nInput String:\t"<<testDecompressedString1;
+	std::string retrievedString = AH.decompress(AH.compress(testDecompressedString1));
+	if(retrievedString == testDecompressedString1){
+		std::cout<<"\n\nPASSED!\n";
+		passCount++;
+	} else {
+		std::cout<<"\n\nFAILED!\n";
+	}
+	std::cout<<"\nActual output:\t"<< retrievedString;
+	std::cout<<"\nExpected output:\t"<< testDecompressedString1;
 
 
 	std::cout<<"\n\n\n\tResult: "<<passCount<<" / "<<total;
