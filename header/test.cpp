@@ -10,6 +10,7 @@ int main(int argc, char const *argv[])
 
 	std::string testEncodedString1 = "00000101000100000110001011010110001010";
 	std::string testEncodedString2 = "1101";
+	std::string retrievedString = "";
 
 	int passCount = 0;
 	int total = 6;
@@ -73,7 +74,7 @@ int main(int argc, char const *argv[])
 	std::cout<<"\n";
 	std::cout<<"\n\n----------Encode-Decode Test1:------------";
 	std::cout<<"\nInput String:\t"<<testDecodedString3;
-	std::string retrievedString = AH.decode(AH.encode(testDecodedString3));
+	retrievedString = AH.decode(AH.encode(testDecodedString3));
 	if(retrievedString == testDecodedString3){
 		std::cout<<"\n\nPASSED!\n";
 		passCount++;
@@ -89,7 +90,7 @@ int main(int argc, char const *argv[])
 	std::cout<<"\n";
 	std::cout<<"\n\n----------Compress-Decompress Test1:------------";
 	std::cout<<"\nInput String:\t"<<testDecompressedString1;
-	std::string retrievedString = AH.decompress(AH.compress(testDecompressedString1));
+	retrievedString = AH.decompress(AH.compress(testDecompressedString1));
 	if(retrievedString == testDecompressedString1){
 		std::cout<<"\n\nPASSED!\n";
 		passCount++;

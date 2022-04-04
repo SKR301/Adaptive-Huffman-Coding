@@ -100,6 +100,20 @@ std::string AdaptiveHuffman::decode(std::string inputText){
 	return output;
 }
 
+// compresses the input test
+std::string AdaptiveHuffman::compress(std::string inputText){
+	std::string encodedStr = encode(inputText);
+
+	return encodedStr;
+}
+
+// decompresses the input test
+std::string AdaptiveHuffman::decompress(std::string inputText){
+	// std::string encodedStr = decode(inputText);
+
+	return inputText;
+}
+
 // creates a node with given inputs
 node AdaptiveHuffman::createNode(std::string str, int n, int freq,int p, std::string c){
 	node temp;
