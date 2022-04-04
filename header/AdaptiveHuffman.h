@@ -132,9 +132,8 @@ std::string AdaptiveHuffman::decompress(std::string inputText){
 	std::cout<<"\n-----------------------------------\n\n";
 	output = "";
 
-	std::cout<<inputText<<"\n";
 	for(int a=0;a<inputText.length();a++){
-		output += d_to_b((int)inputText[a]);
+		output += leftPadString(d_to_b((int)inputText[a]));
 	}
 
 	std::cout<<"\n-----------------------------------\n\n";
@@ -420,8 +419,6 @@ std::string AdaptiveHuffman::d_to_b(int num){
 		num/=2;
 	}
 	reverse(bits.begin(), bits.end());
-	std::cout<<"\n>>>>>>>>>"<<bits;
-
 	return bits;
 }
 
