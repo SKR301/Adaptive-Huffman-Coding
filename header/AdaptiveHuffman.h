@@ -109,20 +109,24 @@ std::string AdaptiveHuffman::compress(std::string inputText){
 	
 	encodedStr = paddedString(encodedStr);
 
-	// int sum=0;
-	// for(int a=0;a<encodedStr.length();a++){
-	// 	sum*=2;
-	// 	if(encodedStr[a] == "1"){
-	// 		sum+=1;
-	// 	}
-	// }
+	int sum=0;
+	for(int a=0;a<encodedStr.length();a++){
+		sum*=2;
+		if(encodedStr[a] == '1'){
+			sum+=1;
+		}
+		if(a%8 == 0){
+			output += (char)sum;
+			sum = 0;
+		}
+	}
 
-	return encodedStr;
+	return output;
 }
 
 // decompresses the input test
 std::string AdaptiveHuffman::decompress(std::string inputText){
-	// std::string encodedStr = decode(inputText);
+	
 
 	return inputText;
 }

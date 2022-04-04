@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
 	} else {
 		std::cout<<"\n\nFAILED!\n";
 	}
-	std::cout<<"\nActual output:\t"<< encodedTestString1;
+	std::cout<<"\nActual output:\t\t"<< encodedTestString1;
 	std::cout<<"\nExpected output:\t"<< testEncodedString1;
 
 	std::cout<<"\n";
@@ -40,7 +40,7 @@ int main(int argc, char const *argv[])
 	} else {
 		std::cout<<"\n\nFAILED!\n";
 	}
-	std::cout<<"\nActual output:\t"<< encodedTestString2;
+	std::cout<<"\nActual output:\t\t"<< encodedTestString2;
 	std::cout<<"\nExpected output:\t"<< testEncodedString2;
 
 
@@ -54,7 +54,7 @@ int main(int argc, char const *argv[])
 	} else {
 		std::cout<<"\n\nFAILED!\n";
 	}
-	std::cout<<"\nActual output:\t"<< decodedTestString1;
+	std::cout<<"\nActual output:\t\t"<< decodedTestString1;
 	std::cout<<"\nExpected output:\t"<< testDecodedString1;
 
 	std::cout<<"\n";
@@ -67,7 +67,7 @@ int main(int argc, char const *argv[])
 	} else {
 		std::cout<<"\n\nFAILED!\n";
 	}
-	std::cout<<"\nActual output:\t"<< decodedTestString2;
+	std::cout<<"\nActual output:\t\t"<< decodedTestString2;
 	std::cout<<"\nExpected output:\t"<< testDecodedString2;
 
 
@@ -81,7 +81,7 @@ int main(int argc, char const *argv[])
 	} else {
 		std::cout<<"\n\nFAILED!\n";
 	}
-	std::cout<<"\nActual output:\t"<< retrievedString;
+	std::cout<<"\nActual output:\t\t"<< retrievedString;
 	std::cout<<"\nExpected output:\t"<< testDecodedString3;
 
 
@@ -97,8 +97,11 @@ int main(int argc, char const *argv[])
 	} else {
 		std::cout<<"\n\nFAILED!\n";
 	}
-	std::cout<<"\nActual output:\t"<< retrievedString;
+	std::cout<<"\nActual output:\t\t"<< retrievedString;
 	std::cout<<"\nExpected output:\t"<< testDecompressedString1;
+
+
+
 
 
 	std::cout<<"\n\n\n\tResult: "<<passCount<<" / "<<total;
