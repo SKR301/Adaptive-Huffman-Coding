@@ -28,7 +28,9 @@ public:
 	void switchNodes(int,int);
 	void reNumCode(int);
 	int b_to_d(std::string);
-	std::string paddedString(std::string);
+	std::string d_to_b(int);
+	std::string rightPadString(std::string);
+	std::string leftPadString(std::string);
 
 	void display();
 };
@@ -104,11 +106,10 @@ std::string AdaptiveHuffman::decode(std::string inputText){
 
 // compresses the input test
 std::string AdaptiveHuffman::compress(std::string inputText){
-	std::cout<<"\n-----------------------------------\n\n";
 	std::string encodedStr = encode(inputText);
 	output = "";
 	
-	encodedStr = "0"+paddedString(encodedStr);
+	encodedStr = "0"+rightPadString(encodedStr);
 
 std::cout<<encodedStr<<"\n\n\n";
 	int sum=0;
@@ -117,13 +118,11 @@ std::cout<<encodedStr<<"\n\n\n";
 		if(encodedStr[a] == '1'){
 			sum+=1;
 		}
-		if(a%8 == 0){
+		if(a%8 == 0 && a!=0){
 			output += (char)sum;
-			std::cout<<sum<<"-";
 			sum = 0;
 		}
 	}
-	std::cout<<"\n-----------------------------------\n\n";
 
 	return output;
 }
@@ -135,12 +134,11 @@ std::string AdaptiveHuffman::decompress(std::string inputText){
 
 	std::cout<<inputText<<"\n";
 	for(int a=0;a<inputText.length();a++){
-		std::cout<<(int)inputText[a]<<" ";
+		output += d_to_b((int)inputText[a]);
 	}
 
-
 	std::cout<<"\n-----------------------------------\n\n";
-	return inputText;
+	return output;
 }
 
 // creates a node with given inputs
@@ -410,13 +408,40 @@ int AdaptiveHuffman::b_to_d(std::string bit){
 	return dec;
 }
 
+//convert decimal to binary
+std::string AdaptiveHuffman::d_to_b(int num){
+	std::string bits = "";
+	while(num){
+		if(num%2){
+			bits+="1";
+		} else {
+			bits += "0";
+		}
+		num/=2;
+	}
+	reverse(bits.begin(), bits.end());
+	std::cout<<"\n>>>>>>>>>"<<bits;
+
+	return bits;
+}
+
 // right-pad the string with 0 for multiple of 8
-std::string AdaptiveHuffman::paddedString(std::string str){
+std::string AdaptiveHuffman::rightPadString(std::string str){
 	for(int a=0; a < str.length()%8; a++){
 		str = str + "0";
 	}
 	return str;
 }
+
+// left-pad the string with 0 for multiple of 8
+std::string AdaptiveHuffman::leftPadString(std::string str){
+	for(int a=0; a < str.length()%8; a++){
+		str = "0" + str;
+	}
+	return str;
+}
+
+
 
 //display
 void AdaptiveHuffman::display(){
