@@ -85,7 +85,7 @@ int main(int argc, char const *argv[])
 	std::cout<<"\nExpected output:\t"<< testDecodedString3;
 
 
-	std::string testDecompressedString1 = "aaab"; // 0000011000001
+	std::string testDecompressedString1 = "aaab"; // 00000110 00001000
 
 	std::cout<<"\n";
 	std::cout<<"\n\n----------Compress-Decompress Test1:------------";

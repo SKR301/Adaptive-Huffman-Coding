@@ -104,11 +104,13 @@ std::string AdaptiveHuffman::decode(std::string inputText){
 
 // compresses the input test
 std::string AdaptiveHuffman::compress(std::string inputText){
+	std::cout<<"\n-----------------------------------\n\n";
 	std::string encodedStr = encode(inputText);
 	output = "";
 	
-	encodedStr = paddedString(encodedStr);
+	encodedStr = "0"+paddedString(encodedStr);
 
+std::cout<<encodedStr<<"\n\n\n";
 	int sum=0;
 	for(int a=0;a<encodedStr.length();a++){
 		sum*=2;
@@ -117,17 +119,27 @@ std::string AdaptiveHuffman::compress(std::string inputText){
 		}
 		if(a%8 == 0){
 			output += (char)sum;
+			std::cout<<sum<<"-";
 			sum = 0;
 		}
 	}
+	std::cout<<"\n-----------------------------------\n\n";
 
 	return output;
 }
 
 // decompresses the input test
 std::string AdaptiveHuffman::decompress(std::string inputText){
-	
+	std::cout<<"\n-----------------------------------\n\n";
+	output = "";
 
+	std::cout<<inputText<<"\n";
+	for(int a=0;a<inputText.length();a++){
+		std::cout<<(int)inputText[a]<<" ";
+	}
+
+
+	std::cout<<"\n-----------------------------------\n\n";
 	return inputText;
 }
 
