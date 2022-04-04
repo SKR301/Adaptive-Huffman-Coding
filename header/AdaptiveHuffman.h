@@ -28,6 +28,8 @@ public:
 	void switchNodes(int,int);
 	void reNumCode(int);
 	int b_to_d(std::string);
+	std::string paddedString(std::string);
+
 	void display();
 };
 
@@ -103,6 +105,17 @@ std::string AdaptiveHuffman::decode(std::string inputText){
 // compresses the input test
 std::string AdaptiveHuffman::compress(std::string inputText){
 	std::string encodedStr = encode(inputText);
+	output = "";
+	
+	encodedStr = paddedString(encodedStr);
+
+	// int sum=0;
+	// for(int a=0;a<encodedStr.length();a++){
+	// 	sum*=2;
+	// 	if(encodedStr[a] == "1"){
+	// 		sum+=1;
+	// 	}
+	// }
 
 	return encodedStr;
 }
@@ -379,6 +392,14 @@ int AdaptiveHuffman::b_to_d(std::string bit){
 		}
 	}
 	return dec;
+}
+
+// right-pad the string with 0 for multiple of 8
+std::string AdaptiveHuffman::paddedString(std::string str){
+	for(int a=0; a < str.length()%8; a++){
+		str = str + "0";
+	}
+	return str;
 }
 
 //display
