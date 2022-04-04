@@ -59,6 +59,7 @@ std::string AdaptiveHuffman::encode(std::string inputText){
 	return output;
 }
 
+// decode the input text
 std::string AdaptiveHuffman::decode(std::string inputText){
 	init();
 
@@ -99,6 +100,7 @@ std::string AdaptiveHuffman::decode(std::string inputText){
 	return output;
 }
 
+// creates a node with given inputs
 node AdaptiveHuffman::createNode(std::string str, int n, int freq,int p, std::string c){
 	node temp;
 	temp.character = str;
@@ -122,6 +124,7 @@ bool AdaptiveHuffman::isCharFirst(int ind, std::string str){
 	return true;
 }
 
+// check if it's the first occurence of the code
 bool AdaptiveHuffman::isCodeFirst(std::string str){
 	for(int a=0;a<Tree.size();a++){
 		if(Tree[a].character==str){
@@ -225,7 +228,6 @@ std::string AdaptiveHuffman::retIntToChar(int x,int bit){
 	}
 	return "";
 }
-
 
 //return code for the data element
 std::string AdaptiveHuffman::retCodeData(std::string str){
