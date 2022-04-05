@@ -1,22 +1,13 @@
 # Adaptive-Huffman-Coding
-A program to encode/decode an input string using Adaptive Huffman Coding Algorithm (vectors used).
+A program to encode/decode and compress/decompress an input string using Adaptive Huffman Coding Algorithm (vectors used).
   
   ## Table of Content
   - [Technologies](#technologies)
-  - [Setup](#setup)
   - [Working](#working)
-  - [Screenshots](#screenshots)
   - [Contributors](#contributors)
   
   ## Technologies
   - C++
-  
-  ## Setup
-  How to start the program:-
-  1. Make sure you have an environment to run C++ programs.
-  2. Go to your **command line** in the directory.
-  3. Compile the c++ code using `g++ -o "my file name.cpp" "Adaptive Huffman encode.cpp"`.
-  4. Now run `./"my file name"`.
   
   ## Working
   ### The cpp files:-
@@ -28,30 +19,12 @@ A program to encode/decode an input string using Adaptive Huffman Coding Algorit
   - Paste the `AdaptiveHuffman.h` and `Node.h` file in your desired directory.
   - Import and use the header with following code :-
 
-  include the header
-  ```
-          #include "AdaptiveHuffman.h"
-  ```
-  use the header
-  ```
-          AdaptiveHuffman AH;
-          
-          // input parameter is a plain text which you want to encode
-          // returns the encoded std::string for input parameter
-          AH.encode("aardvark");                               
-          
-          // input parameter is a encode text which you want to decode
-          // returns the decoded std::string for input parameter
-          AH.decode("00000101000100000110001011010110001010"); 
-          
-  ```
-  
-  ## Screenshots
-  Some screenshots of the program:-
-  - *Adaptive Huffman Encode*<br />
-  ![Adaptive Huffman Encode](https://github.com/SKR301/Adaptive-Huffman-Coding/blob/master/ScreenShots/encode.png)
-  - *Adaptive Huffman Decode*<br />
-  ![Adaptive Huffman Decode](https://github.com/SKR301/Adaptive-Huffman-Coding/blob/master/ScreenShots/decode.png)
+  #### include the header <br>
+  ![image](https://user-images.githubusercontent.com/47807051/161798531-72fa7309-2646-4265-ad28-9b88159496d3.png)
+
+  #### use the header <br>
+  ![image](https://user-images.githubusercontent.com/47807051/161801041-7df8915d-dbc5-4a24-8188-23cb2624778b.png)
+
   
   ## Contributors
   @SKR301- [Saurav Kumar](https://github.com/SKR301)
