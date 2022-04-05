@@ -14,7 +14,7 @@ public:
 	std::string encode(std::string);
 	std::string decode(std::string);
 	std::vector<bool> compress(std::string);
-	std::string decompress(std::string);
+	std::string decompress(std::vector<bool>);
 
 	void init();
 	bool isCharFirst(int, std::string);
@@ -117,26 +117,29 @@ std::vector<bool> AdaptiveHuffman::compress(std::string inputText){
 			bits.push_back(0);
 		}
 	}
+std::cout<<"\n\noutput";
 for (size_t nIndex = 0; nIndex < bits.size (); ++ nIndex)
-        std::cout << bits [nIndex] << ' ';
-
+        std::cout <<bits [nIndex];
 	return bits;
 }
 
 // decompresses the input test
-std::string AdaptiveHuffman::decompress(std::string inputText){
-	std::cout<<"\n-----------------------------------\n\n";
-	output = "";
+std::string AdaptiveHuffman::decompress(std::vector<bool> bits){
+	std::string output = "";
 
-	for(int a=0;a<inputText.length()-1;a++){
-		output += leftPadString(d_to_b((int)inputText[a]));
-		std::cout<<"\n>>>"<<output;
+std::cout<<"\n\ninput:";
+for (size_t nIndex = 0; nIndex < bits.size (); ++ nIndex)
+        std::cout <<bits [nIndex];
+	for(int a=0;a<bits.size();a++){
+		if(bits[a] == 1){
+			output += "1";
+		} else {
+			output += "0";
+		}
 	}
-	output += d_to_b((int)inputText[inputText.length()-1]);
-		std::cout<<"\n>>>"<<output;
 
+	std::cout<<"\n\nstring:"<<output;
 	output = decode(output);
-	std::cout<<"\n-----------------------------------\n\n";
 	return output;
 }
 
