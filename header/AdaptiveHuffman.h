@@ -13,7 +13,7 @@ public:
 	node createNode(std::string, int, int, int, std::string);
 	std::string encode(std::string);
 	std::string decode(std::string);
-	std::string compress(std::string);
+	std::vector<bool> compress(std::string);
 	std::string decompress(std::string);
 
 	void init();
@@ -105,26 +105,22 @@ std::string AdaptiveHuffman::decode(std::string inputText){
 }
 
 // compresses the input test
-std::string AdaptiveHuffman::compress(std::string inputText){
+std::vector<bool> AdaptiveHuffman::compress(std::string inputText){
 	std::string encodedStr = encode(inputText);
-	output = "";
-	
-	encodedStr = "0"+rightPadString(encodedStr);
+	std::vector<bool> bits;
 
-std::cout<<encodedStr<<"\n\n\n";
-	int sum=0;
+	// int sum=0;
 	for(int a=0;a<encodedStr.length();a++){
-		sum*=2;
 		if(encodedStr[a] == '1'){
-			sum+=1;
-		}
-		if(a%8 == 0 && a!=0){
-			output += (char)sum;
-			sum = 0;
+			bits.push_back(1);
+		} else {
+			bits.push_back(0);
 		}
 	}
+for (size_t nIndex = 0; nIndex < bits.size (); ++ nIndex)
+        std::cout << bits [nIndex] << ' ';
 
-	return output;
+	return bits;
 }
 
 // decompresses the input test
@@ -132,10 +128,14 @@ std::string AdaptiveHuffman::decompress(std::string inputText){
 	std::cout<<"\n-----------------------------------\n\n";
 	output = "";
 
-	for(int a=0;a<inputText.length();a++){
+	for(int a=0;a<inputText.length()-1;a++){
 		output += leftPadString(d_to_b((int)inputText[a]));
+		std::cout<<"\n>>>"<<output;
 	}
+	output += d_to_b((int)inputText[inputText.length()-1]);
+		std::cout<<"\n>>>"<<output;
 
+	output = decode(output);
 	std::cout<<"\n-----------------------------------\n\n";
 	return output;
 }

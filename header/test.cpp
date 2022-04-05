@@ -84,9 +84,7 @@ int main(int argc, char const *argv[])
 	std::cout<<"\nActual output:\t\t"<< retrievedString;
 	std::cout<<"\nExpected output:\t"<< testDecodedString3;
 
-
-	std::string testDecompressedString1 = "aaab"; // 00000110 00001000
-
+	std::string testDecompressedString1 = "aaab";
 	std::cout<<"\n";
 	std::cout<<"\n\n----------Compress-Decompress Test1:------------";
 	std::cout<<"\nInput String:\t"<<testDecompressedString1;
@@ -99,10 +97,6 @@ int main(int argc, char const *argv[])
 	}
 	std::cout<<"\nActual output:\t\t"<< retrievedString;
 	std::cout<<"\nExpected output:\t"<< testDecompressedString1;
-
-
-
-
 
 	std::cout<<"\n\n\n\tResult: "<<passCount<<" / "<<total;
 
