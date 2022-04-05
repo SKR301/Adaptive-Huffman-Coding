@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 	std::string retrievedString = "";
 
 	int passCount = 0;
-	int total = 6;
+	int total = 7;
 
 	AdaptiveHuffman AH;
 
@@ -84,7 +84,8 @@ int main(int argc, char const *argv[])
 	std::cout<<"\nActual output:\t\t"<< retrievedString;
 	std::cout<<"\nExpected output:\t"<< testDecodedString3;
 
-	std::string testDecompressedString1 = "aaab";
+
+	std::string testDecompressedString1 = "a";
 	std::cout<<"\n";
 	std::cout<<"\n\n----------Compress-Decompress Test1:------------";
 	std::cout<<"\nInput String:\t"<<testDecompressedString1;
@@ -97,6 +98,22 @@ int main(int argc, char const *argv[])
 	}
 	std::cout<<"\nActual output:\t\t"<< retrievedString;
 	std::cout<<"\nExpected output:\t"<< testDecompressedString1;
+
+
+	std::string testDecompressedString2 = "aardvark";
+	std::cout<<"\n";
+	std::cout<<"\n\n----------Compress-Decompress Test2:------------";
+	std::cout<<"\nInput String:\t"<<testDecompressedString2;
+	retrievedString = AH.decompress(AH.compress(testDecompressedString2));
+	if(retrievedString == testDecompressedString2){
+		std::cout<<"\n\nPASSED!\n";
+		passCount++;
+	} else {
+		std::cout<<"\n\nFAILED!\n";
+	}
+	std::cout<<"\nActual output:\t\t"<< retrievedString;
+	std::cout<<"\nExpected output:\t"<< testDecompressedString2;
+
 
 	std::cout<<"\n\n\n\tResult: "<<passCount<<" / "<<total;
 
