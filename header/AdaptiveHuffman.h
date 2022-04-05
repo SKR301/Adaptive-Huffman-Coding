@@ -13,6 +13,8 @@ public:
 	node createNode(std::string, int, int, int, std::string);
 	std::string encode(std::string);
 	std::string decode(std::string);
+	std::vector<bool> compress(std::string);
+	std::string decompress(std::vector<bool>);
 
 	void init();
 	bool isCharFirst(int, std::string);
@@ -26,6 +28,7 @@ public:
 	void switchNodes(int,int);
 	void reNumCode(int);
 	int b_to_d(std::string);
+
 	void display();
 };
 
@@ -57,6 +60,7 @@ std::string AdaptiveHuffman::encode(std::string inputText){
 	return output;
 }
 
+// decode the input text
 std::string AdaptiveHuffman::decode(std::string inputText){
 	init();
 
@@ -97,6 +101,38 @@ std::string AdaptiveHuffman::decode(std::string inputText){
 	return output;
 }
 
+// compresses the input test
+std::vector<bool> AdaptiveHuffman::compress(std::string inputText){
+	inputText = encode(inputText);
+	std::vector<bool> bits;
+
+	for(int a=0;a<inputText.length();a++){
+		if(inputText[a] == '1'){
+			bits.push_back(1);
+		} else {
+			bits.push_back(0);
+		}
+	}
+	return bits;
+}
+
+// decompresses the input test
+std::string AdaptiveHuffman::decompress(std::vector<bool> bits){
+	std::string outputText = "";
+
+	for(int a=0;a<bits.size();a++){
+		if(bits[a] == 1){
+			outputText += "1";
+		} else {
+			outputText += "0";
+		}
+	}
+
+	outputText = decode(outputText);
+	return outputText;
+}
+
+// creates a node with given inputs
 node AdaptiveHuffman::createNode(std::string str, int n, int freq,int p, std::string c){
 	node temp;
 	temp.character = str;
@@ -120,6 +156,7 @@ bool AdaptiveHuffman::isCharFirst(int ind, std::string str){
 	return true;
 }
 
+// check if it's the first occurence of the code
 bool AdaptiveHuffman::isCodeFirst(std::string str){
 	for(int a=0;a<Tree.size();a++){
 		if(Tree[a].character==str){
@@ -223,7 +260,6 @@ std::string AdaptiveHuffman::retIntToChar(int x,int bit){
 	}
 	return "";
 }
-
 
 //return code for the data element
 std::string AdaptiveHuffman::retCodeData(std::string str){
