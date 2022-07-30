@@ -1,50 +1,49 @@
 #include<bits/stdc++.h>
-using namespace std;
 
 class node{
 public:
-	string ch;
+	std::string ch;
 	int weight;
 	int no;
 	int left;
 	int right;
 	int parent;
-	string code;
+	std::string code;
 };
 
-// string data="00000101000100000110001011010110001010";
-string data;
-string output;
-vector<node>tree;
+// std::string data="00000101000100000110001011010110001010";
+std::string data;
+std::string output;
+std::vector<node>tree;
 int NYT=0;
 int nodeNo=51;
 int currNode=0;
 
-void createNode(string,int,int,int,string);
+void createNode(std::string,int,int,int,std::string);
 void decode();
-int b_to_d(string);
-string givenCode(int,int);
-void update(bool,string);
+int b_to_d(std::string);
+std::string givenCode(int,int);
+void update(bool,std::string);
 void gotoParent(int);
 int findNodeMax(int);
 void switchNodes(int,int);
 void reNumCode(int);
-bool first(string);
+bool first(std::string);
 void display();
 
 int main(){
-	cout<<"\nEnter the string to encode:";
-	cin>>data;
+	std::cout<<"\nEnter the string to encode:";
+	std::cin>>data;
 
 	createNode("NYT",51,0,-1,"");
 
 	decode();
-	cout<<"\n\nAdaptive huffman decode for "<<data<<" is:\n"<<output<<"\n\n";
+	std::cout<<"\n\nAdaptive huffman decode for "<<data<<" is:\n"<<output<<"\n\n";
 	system("pause");
 }
 
 //create a node and push it in tree
-void createNode(string x,int num,int freq,int p,string c){
+void createNode(std::string x,int num,int freq,int p,std::string c){
 	node temp;
 	temp.ch=x;
 	temp.no=num;
@@ -59,7 +58,7 @@ void createNode(string x,int num,int freq,int p,string c){
 
 void decode(){
 	int a=0,p;
-	string code;
+	std::string code;
 	bool firstFlag;
 
 	do{
@@ -95,7 +94,7 @@ void decode(){
 }
 
 //convert binary to decimal
-int b_to_d(string bit){
+int b_to_d(std::string bit){
 	int dec=0;
 	for(int a=bit.length()-1;a>=0;a--){
 		if(bit[a]=='1'){
@@ -106,7 +105,7 @@ int b_to_d(string bit){
 }
 
 //return code for specific data element
-string givenCode(int x,int bit){
+std::string givenCode(int x,int bit){
 	if(bit==5){
 		if(x==0){
 			return "a";
@@ -167,7 +166,7 @@ string givenCode(int x,int bit){
 	return "";
 }
 
-bool first(string str){
+bool first(std::string str){
 	for(int a=0;a<tree.size();a++){
 		if(tree[a].ch==str){
 			return false;
@@ -177,7 +176,7 @@ bool first(string str){
 }
 
 //update the tree
-void update(bool flag,string str){
+void update(bool flag,std::string str){
 	if(flag){
 		tree[NYT].ch="-";
 		tree[NYT].left=tree.size();
@@ -253,7 +252,7 @@ void switchNodes(int a,int b){
 	tree[b].no=temp;
 
 	//swap code
-	string str=tree[a].code;
+	std::string str=tree[a].code;
 	tree[a].code=tree[b].code;
 	tree[b].code=str;
 
@@ -293,8 +292,8 @@ void reNumCode(int n){
 //display
 void display(){
 	for(int a=0;a<tree.size();a++){
-		cout<<"\n"<<a<<" ch:"<<tree[a].ch<<" weight:"<<tree[a].weight<<" no:"<<tree[a].no<<" l:"<<tree[a].left<<" r:"<<tree[a].right<<" p:"<<tree[a].parent<<" code:"<<tree[a].code;
+		std::cout<<"\n"<<a<<" ch:"<<tree[a].ch<<" weight:"<<tree[a].weight<<" no:"<<tree[a].no<<" l:"<<tree[a].left<<" r:"<<tree[a].right<<" p:"<<tree[a].parent<<" code:"<<tree[a].code;
 	}
-	cout<<"\n";
+	std::cout<<"\n";
 	system("pause");
 }
